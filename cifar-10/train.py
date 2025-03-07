@@ -8,7 +8,7 @@ from torchvision import datasets, transforms
 from model import SimpleCNN
 from config import CONFIG
 
-def train_model(dataset, train_indices, hyperparams):
+def train_model(dataset, train_indices, hyperparams, verbose=True):
     """
     Train the model on the given training indices.
     Returns the trained model.
@@ -37,7 +37,8 @@ def train_model(dataset, train_indices, hyperparams):
 
             running_loss += loss.item()
         avg_loss = running_loss / len(train_loader)
-        print(f'Epoch {epoch+1}/{hyperparams["num_epochs"]} - Loss: {avg_loss:.3f}')
+        if verbose:
+            print(f'Epoch {epoch+1}/{hyperparams["num_epochs"]} - Loss: {avg_loss:.3f}')
     return model
 
 def evaluate_model(model, dataset, val_indices, hyperparams):
